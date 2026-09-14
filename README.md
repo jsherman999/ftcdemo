@@ -4,6 +4,8 @@ A browser programming demo with the official BIOBUZZ field CAD, one configurable
 
 ## Try it
 
+**[Open FTC Field Lab](https://jsherman999.github.io/ftcdemo/)**
+
 1. Select a Java example.
 2. Initialize, then Start.
 3. Observe the robot, encoders, front distance, IMU yaw, floor color, and contact sensor.
@@ -38,13 +40,11 @@ pnpm preview:local
 
 Preview the build at **http://localhost:4173/ftcdemo/**. `dist-pages/` contains the deployable HTML, JavaScript, CSS, and CAD assets. Serve it over HTTP; double-clicking `index.html` is not supported.
 
-To publish when ready:
+The `Publish GitHub Pages` workflow validates TypeScript, runs the simulator behavior checks, builds the static app, and publishes every push to `main`. Pull requests run the same build checks without publishing. To redeploy manually, open **Actions → Publish GitHub Pages → Run workflow** on `main`.
 
-1. In this repository, go to **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-2. Open **Actions → Publish GitHub Pages → Run workflow** on `main`.
-3. After the workflow succeeds, GitHub reports the Pages URL (normally `https://jsherman999.github.io/ftcdemo/`).
+Repository **Settings → Pages → Source** uses **GitHub Actions**. The live app is at **https://jsherman999.github.io/ftcdemo/**. The Pages build uses `/ftcdemo/` as its base path; CAD, scripts, styles, favicon, and home navigation honor this subpath. For a different repository name or a custom domain, update `base` in `vite.pages.config.ts`.
 
-The workflow is manual; code pushes do not automatically publish. The Pages build uses `/ftcdemo/` as its base path. For a different repository name or a custom domain, update `base` in `vite.pages.config.ts`. GitHub Pages does not reproduce the owner-only access gate of the private Sites demo.
+GitHub Pages is public. The source export excludes the private Sites deployment binding and credentials. The original Sites access policy is separate from this deployment.
 
 ## Where student work is stored
 
@@ -112,7 +112,7 @@ Use `pnpm dev:local` for the standalone app, `pnpm build:pages` for static deplo
 
 The pinned package manager and lockfile are retained. The unused starter storage/auth helpers are not part of the static application bundle. Production build output and developer caches are excluded from Git.
 
-The behavioral checks cover examples, encoder travel, sensor stops, wall collisions, gamepad motion, stopping, bounded loops, invalid hardware, and servo release. The static Pages build and subpath asset references were checked locally. Browser/end-to-end interaction tests were not run. Optional WebMCP tools are feature-detected, and validation in a supported browser context was unavailable.
+The behavioral checks cover examples, encoder travel, sensor stops, wall collisions, gamepad motion, stopping, bounded loops, invalid hardware, and servo release. The static Pages build and subpath asset references were checked locally. Browser smoke testing covers the built app at the Pages subpath, official CAD loading, and running the first Java lesson. Optional WebMCP tools are feature-detected.
 
 ## Official references
 
